@@ -21,7 +21,7 @@ Sample code for generating delta sql that can be used with a CI/CD pipeline in S
 The sample code and perl module is a simple example of how you can turn a
 declarative-style repository of individual objects under git source control into a
 delta pipeline of changes as required by tools such as
-[schemachange](https://github.com/Snowflake-Labs/schemachange)/Formerly Snowchange:
+[schemachange](https://github.com/Snowflake-Labs/schemachange)/Formerly
 [Snowchange](https://jeremiahhansen.medium.com/snowchange-a-database-change-management-tool-b9f0b786a7da)
 
 ### Input from GIT
@@ -43,7 +43,6 @@ files that creates sample input files through a git [post-merge-hook](git-post-m
 
 use lib '.';
 use SnowflakeCICD;
-use Data::Dumper;
 
 my $git_output_file = shift || die "Need to provide a git metadata file";
 
@@ -72,8 +71,6 @@ the object types, names, column types, etc with.
 ```
 $cicd->ddl->name_pat can be used directly to extract a valid name per the Snowflake documentation
 $cicd->ddl->type_pat
-
-
 ```
 
 ### Configuration
