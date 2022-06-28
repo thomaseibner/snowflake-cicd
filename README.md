@@ -93,11 +93,11 @@ Included sample git-repo processing has a dependency on git >= 2.28 for `git ini
 
 To install on your variety of Linux:
 
+```
 sudo add-apt-repository -y ppa:git-core/ppa
-
 sudo apt update
-
 sudo apt install git -y
+```
 
 ## Author
 
