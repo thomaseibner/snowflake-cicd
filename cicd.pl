@@ -22,7 +22,15 @@ foreach my $path ($cicd->changed_paths()) {
     # extract each file by path
     # write metadata to output files
     $cicd->add_to_update("-- path: $path");
+    $cicd->add_to_update("-- variables to substitute for deployment");
+    $cicd->add_to_update("use role \@\@ROLE\@\@;");
+    $cicd->add_to_update("use database \@\@DATABASE\@\@;");
+    $cicd->add_to_update("use schema \@\@SCHEMA\@\@;");
     $cicd->add_to_rollback("-- path: $path");
+    $cicd->add_to_rollback("-- variables to substitute for deployment");
+    $cicd->add_to_rollback("use role \@\@ROLE\@\@;");
+    $cicd->add_to_rollback("use database \@\@DATABASE\@\@;");
+    $cicd->add_to_rollback("use schema \@\@SCHEMA\@\@;");
     foreach my $file ($cicd->changed_files_by_path($path)) {
 	my $action = $cicd->git->file_action($file);
 	$cicd->add_to_update("-- $action $file");
@@ -77,12 +85,13 @@ mkpath($cicd_output_dir . '/' . $cur_branch . '/rollback');
 my ($d, $m, $y) = ( localtime() )[3..5];
 my $date = sprintf("%d-%02d-%02d", $y+1900, $m+1, $d);
 
-
 open(FH, ">" . $cicd_output_dir . '/' . $cur_branch . '/001_' . $date . '.sql') or die $!;
-print FH "-- UPDATE: $prev_branch -> $cur_branch\n", $cicd->update(), "\n";
+print FH "-- UPDATE: $prev_branch -> $cur_branch\n";
+print FH $cicd->update(), "\n";
 close(FH);
 open(FH, ">" . $cicd_output_dir . '/' . $cur_branch . '/rollback/001_' . $date . '.sql') or die $!;
-print FH "-- ROLLBACK: $cur_branch -> $prev_branch\n", $cicd->rollback(), "\n";
+print FH "-- ROLLBACK: $cur_branch -> $prev_branch\n";
+print FH $cicd->rollback(), "\n";
 close(FH);
 
 sub SnowflakeCICD::process_table_changes {
