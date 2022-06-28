@@ -1,0 +1,13 @@
+#!/bin/bash
+MY_GIT_REV=`set | egrep GITHEAD_ | sed -e 's/[\=_]/ /g' | awk '{ print $2 }'`
+MY_GIT_BRANCH=`set | egrep GITHEAD_ | sed -e 's/[\=_]/ /g' | awk '{ print $3 }'`
+echo PWD is $PWD
+OUTPUTDIR=$PWD/../branch-output
+CUR_BRANCH=`git branch --show-current`
+PREV_BRANCH=`echo $GIT_REFLOG_ACTION | sed -e 's/merge //'`
+echo "Merged into $CUR_BRANCH from $PREV_BRANCH"
+echo "Merged into $CUR_BRANCH from $PREV_BRANCH" > $OUTPUTDIR/$MY_GIT_REV-$CUR_BRANCH.diff
+git show --oneline --name-status --no-abbrev HEAD >> $OUTPUTDIR/$MY_GIT_REV-$CUR_BRANCH.diff
+git show --oneline --no-abbrev >> $OUTPUTDIR/$MY_GIT_REV-$CUR_BRANCH.diff 
+git archive --format tar.gz --prefix=deploy/ --output $OUTPUTDIR/$MY_GIT_REV-$CUR_BRANCH-update.tar.gz $MY_GIT_REV
+git archive --format tar.gz --prefix=rollback/ --output $OUTPUTDIR/$MY_GIT_REV-$CUR_BRANCH-rollback.tar.gz `git log --oneline --no-abbrev | head -2 | tail -1 | awk '{ print $1 }'`

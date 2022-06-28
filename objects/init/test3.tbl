@@ -1,0 +1,6 @@
+CREATE OR REPLACE TABLE TEST3 (
+	id int not null,
+	column_to_be_removed varchar null,
+	notes varchar not null
+);
+

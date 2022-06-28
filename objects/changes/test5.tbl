@@ -1,0 +1,13 @@
+create table test5 (
+  id integer not null,
+  field12 varchar not null,
+  field13 varchar null,
+  field14 varchar null,
+  field5 integer null,
+  field16 varchar null,
+  field7 integer null,
+  field8 string null,
+  field9 varchar null,
+  field10 integer null,
+  field11 numeric(38,2) null
+);

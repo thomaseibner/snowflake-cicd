@@ -1,0 +1,12 @@
+CREATE OR REPLACE PROCEDURE "MYPROC"(test varchar)
+RETURNS BOOLEAN
+LANGUAGE SQL
+EXECUTE AS CALLER
+AS
+$$
+    BEGIN
+        return 0;
+    END;
+
+$$
+;

@@ -1,0 +1,12 @@
+CREATE OR REPLACE PROCEDURE MYPROC2(val varchar)
+RETURNS VARCHAR
+LANGUAGE SQL
+EXECUTE AS CALLER
+AS
+$$
+    BEGIN
+        return val;
+    END;
+
+$$
+;

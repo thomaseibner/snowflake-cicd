@@ -1,0 +1,5 @@
+CREATE OR REPLACE TABLE TEST1 (
+	id int not null,
+	notes varchar not null
+);
+
