@@ -85,11 +85,11 @@ mkpath($cicd_output_dir . '/' . $cur_branch . '/rollback');
 my ($d, $m, $y) = ( localtime() )[3..5];
 my $date = sprintf("%d-%02d-%02d", $y+1900, $m+1, $d);
 
-open(FH, ">" . $cicd_output_dir . '/' . $cur_branch . '/001_' . $date . '.sql') or die $!;
+open(FH, ">" . $cicd_output_dir . '/' . $cur_branch . '/V1_' . $date . '.sql') or die $!;
 print FH "-- UPDATE: $prev_branch -> $cur_branch\n";
 print FH $cicd->update(), "\n";
 close(FH);
-open(FH, ">" . $cicd_output_dir . '/' . $cur_branch . '/rollback/001_' . $date . '.sql') or die $!;
+open(FH, ">" . $cicd_output_dir . '/' . $cur_branch . '/rollback/V1_' . $date . '.sql') or die $!;
 print FH "-- ROLLBACK: $cur_branch -> $prev_branch\n";
 print FH $cicd->rollback(), "\n";
 close(FH);
