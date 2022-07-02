@@ -18,15 +18,15 @@ Sample code for generating delta sql that can be used with a CI/CD pipeline in S
 
 ## Description 
 
-The sample code and perl module is a simple example of how you can turn a
+The sample code and perl module is a simple example of how, you can turn a
 declarative-style repository of individual objects under git source control into a
-delta pipeline of changes as required by tools such as
+delta pipeline of changes, as required by tools such as
 [schemachange](https://github.com/Snowflake-Labs/schemachange)/Formerly
 [Snowchange](https://jeremiahhansen.medium.com/snowchange-a-database-change-management-tool-b9f0b786a7da)
 
 ### Input from GIT
 
-The module and sample script takes an input file of the changes from GIT as well as a
+The module and sample script takes an input file of the changes from GIT, as well as a
 `git archive` tar.gz file from the current version and prior version to facilitate fully
 reloading objects like stored procedures and functions where the parameters could have
 changed. The same way you can generate the update pipeline to deploy it can also produce
